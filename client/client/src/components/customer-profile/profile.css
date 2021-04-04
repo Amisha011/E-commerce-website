@@ -1,0 +1,139 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    border: 5px solid black;
+    margin: 10px;
+    padding: 20px;
+    /* margin-top: 31px; */
+    /* margin-bottom: 30px; */
+    padding-top: 53px;
+    background-color: #403f3861;
+    padding-bottom: 53px;
+}
+.top{
+    border: 2px solid black;
+    display: flex;
+    margin-bottom: 3px;
+    padding: 12px;
+    width: 19vw;
+}
+.top img{
+    height: 14vh;
+    width: 14vh;
+    border-radius: 50%;
+    padding-right: 0px;
+}
+.top button{
+    height: 5vh;
+    margin: 39px 26px;
+    width: 11vw;
+    /* background: white; */
+    border: none;
+    outline: none;
+    /* border: 2px solid black; */
+    text-align: initial;
+}
+.box1{
+    margin-left: 145px;  
+}
+.list{
+    display:flex;
+    flex-direction: column;
+    padding:20px;
+    border:2px solid black ;
+    
+}
+.list a{
+    text-align: left;
+    text-decoration: none;
+    margin: 5px;
+    color: black;
+    font-weight: 700;
+}
+.list button{
+    width: 6vw;
+    margin-top: 11px;
+    background: red;
+    color: white;
+    border: none;
+    outline: none;
+    height: 4vh;
+    font-weight: 500;
+    border-radius: 15px;
+}
+.box2{
+    margin-left: 111px;
+    width: 44vw;
+    border: 2px solid black;
+}
+.box2 h2{
+    text-align: center;
+}
+.box3{
+    display: flex;
+    flex-direction: row;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+ }
+.div1 input{
+    height: 4vh;
+    margin: 7px;
+    width: 14vw;
+    outline: none;
+}
+.div1{
+    display: flex;
+    flex-direction: column;
+    padding: 32px;
+}
+
+.div2{
+    display: flex;
+    flex-direction: column;
+    margin-left: 51px;
+    width: 304px;
+    border-left: 2px solid black;
+    margin-bottom: 10px;
+}
+.div2 img{
+    height: 30vh;
+    width: 30vh;
+    padding: 10px;
+    margin-left: 48px;
+    border-radius: 30px;
+}
+.div2 h3{
+    text-align: center;
+    line-height: 2px;
+}
+.div2 input{
+    width: 8vw;
+    height: 4vh;
+    margin: 11px 90px;
+}
+.Edit{
+    display: flex;
+    margin: 10px;
+    margin-left: 314px;
+    padding: 10px;
+    background-color: rgb(44, 192, 44);
+    color: white;
+    border: none;
+    width: 8vw;
+    padding-left: 30px;
+    font-size: medium;
+    border-radius: 9px;
+    outline: none;
+}
+#input[type="file"]{
+    display: none;
+}
+.label label{
+    margin-left: 83px;
+    font-weight: 500;
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 7px;   
+}

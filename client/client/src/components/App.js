@@ -1,4 +1,5 @@
 import React from "react";
+<<<<<<< HEAD
 import SignUp from "../components/user_login-signup/signUp"
 import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 import Login from "../components/user_login-signup/loginPage";
@@ -25,6 +26,21 @@ function App() {
     const history = useHistory();
     const isLoggedIn = localStorage.getItem('isLoggedIn');
     const userType = localStorage.getItem('userType');
+=======
+import SignUp from "../components/signUp"
+import { Route, Switch, link } from "react-router-dom";
+import Login from "./loginPage";
+import Header from "./header";
+import Navbar from "./navbar";
+import HomePage from "./homePage";
+import Footer from "./footer";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Bestsellers from "../components/Bestseller/bestsellers";
+import AdminLogin from "../Admin/adminLogin";
+
+function App() {
+>>>>>>> df351c45ad8016cc144f5e27ef8a85e2d863ad16
     return (
         <div>
             <ToastContainer
@@ -34,7 +50,11 @@ function App() {
                 newestOnTop={false}
                 closeOnClick
                 rtl={false}
+<<<<<<< HEAD
                 pauseOnFocusLoss={false}
+=======
+                pauseOnFocusLoss
+>>>>>>> df351c45ad8016cc144f5e27ef8a85e2d863ad16
                 draggable
                 pauseOnHover
             />
@@ -47,6 +67,7 @@ function App() {
                 <Route exact path="/Register" component={SignUp} />
                 <Route exact path="/Login" component={Login} />
                 <Route exact path="/bestsellers" component={Bestsellers} />
+<<<<<<< HEAD
                 <Route exact path="/NewArrival" component={NewArrival} />
                 <Route exact path="/TextBooks" component={TextBook} />
                 <Route exact path="/profile" component={Profile} />
@@ -61,6 +82,9 @@ function App() {
                 </>:history.push("/Admin")
                 }
                 <Route exact path="/Admin/home/productsList/editProduct" component={EditProduct} />
+=======
+                <Route exact path="/Admin/Login" component={AdminLogin} />
+>>>>>>> df351c45ad8016cc144f5e27ef8a85e2d863ad16
             </Switch>
             <Footer />
         </div>

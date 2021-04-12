@@ -25,6 +25,9 @@ const Login = () => {
             console.log("data", formdataa);
             const response = await axios.post("http://localhost:8001/api/user/login", formdataa);
             console.log("Response", response);
+            const user = response.data.user ;
+            console.log('login response : ', response) ;
+            localStorage.setItem('user', JSON.stringify(user)) ;
             const userType = response.data.user.userType;
             if (userType === "user") {
                 history.push("/");

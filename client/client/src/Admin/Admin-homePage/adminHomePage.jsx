@@ -12,7 +12,7 @@ const adminHomePage = () => {
                 </div>
                 <div>
                     <button> <Link to="/Admin/home/ProductTable">Products list</Link></button>
-                    <button>Orders list</button>
+                    <button><Link to="/Admin/home/getAllOrders">All orders list</Link></button>
                 </div>
             </div>
 

@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 const SignUp = () => {
     //stting the state of user details
-    let history=useHistory();
+    let history = useHistory();
     const [loader, setLoader] = useState(false)
     const [formData, setFormData] = useState(
         {
@@ -29,13 +29,14 @@ const SignUp = () => {
         try {
             console.log("formdata", formData)
             const response = await axios.post("http://localhost:8001/api/user/signUp", formData);
-            console.log("response", response);
-
+            const user = response.data.user;
+            console.log('login response : ', response);
+            localStorage.setItem('user', JSON.stringify(user));
             const userType = response.data.user.userType;
 
-         //   const user = JSON.stringify(response.data.user);
+
             localStorage.setItem("token", response.data.token)
-            localStorage.setItem("isLoggedIn",true);
+            localStorage.setItem("isLoggedIn", true);
             localStorage.setItem("userType", response.data.user.userType);
             if (userType === "user") {
                 toast.success("Successfully signed up");

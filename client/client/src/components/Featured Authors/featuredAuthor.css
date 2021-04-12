@@ -1,5 +1,7 @@
 .featuredAuthor{
-background-image: linear-gradient(to left, rgb(214, 86, 165) , rgb(228, 207, 228));
+/* background-image: linear-gradient(to left, rgb(214, 86, 165) , rgb(228, 207, 228));
+} */
+background-color: white;
 }
 .featuredAuthor h1{
     padding-left: 10px;

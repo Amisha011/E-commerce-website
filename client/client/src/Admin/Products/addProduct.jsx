@@ -60,58 +60,6 @@ const Product = () => {
         //setLoading(false)
     }
     
-    //get api for fetching the product
-
-
-    // const fetchProducts = async () => {
-    //     try {
-    //         const response = await axios.get("http://Localhost:8001/api/product/getAllProducts", productFormData);
-    //         setProduct(response.data);
-    //     } catch (error) {
-    //         console.log("error", error);
-    //     }
-
-    // }
-    //put api for updating a product
-    
-    // const updateProductData = (item) => {
-    //     console.log("hello")
-    //     setProductFormData ({
-    //         ...productFormData,
-    //         ["bookName"]: item.bookName,
-    //         ["price"]: item.price,
-    //         ["image"]:item.image,
-    //         ["author"]:item.author,
-    //         ['cutPrice']: item.cutPrice,
-    //         ["bookType"]: item.bookType,
-            
-    //     });
-    //     setProductId(item._id);
-    //     console.log(item._id)
-    // };
-    
-    // const updateProduct = async() =>{
-    //     console.log(productFormData);
-    //     console.log(productId);
-    //     try {
-    //         const response = await axios.put(`http://localhost:8001/api/product/updateProduct/${productId}`, productFormData);
-    //         toast.success("Successfully Updated product !!");
-    //     } catch (error) {
-    //         console.log("error", error.response);
-    //     }
-    // }
-
-    // //delete product 
-
-    // const deleteProduct=async(_id)=>{
-    //     try {
-    //       const response=await axios.delete(`http://localhost:8001/api/product/deleteProduct/${_id}`)  
-    //       console.log("response ",response);
-    //       toast.success("Successfully deleted product !!");
-    //     } catch (error) {
-    //         console.log("error",error.response);
-    //     }
-    // }
     return (
         <div style={{backgroundColor:"cadetblue",padding:"10px"}}>
             <div className="productDetails">
@@ -126,6 +74,8 @@ const Product = () => {
 
 
                 <input
+                style={{backgroundColor:"white",borderStyle: "inset",borderColor:"-internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133))",borderImage: "initial"}}
+                border
                     type="file"
                     name="image"
                     placeholder="image url"

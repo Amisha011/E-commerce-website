@@ -1,24 +1,49 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
-//import { render } from "react-dom"
-//import axios from "axios";
-import { Link } from "react-router-dom"
+import "../loader/loader.css"
 import "../customer-profile/profile.css"
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import { useHistory,Link } from "react-router-dom";
+
 
 const Profile = () => {
-
-    const [data, setData] = useState({})
-    const[userData,setUserdata]=useState({
-        name:data.name,
-        email:data.email,
-        phoneNumber:data.number,
-        
-    })
+    const [loader, setLoader] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [imgstate, setImagestate] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png")
+    // Add image logic here
+    const user_string = localStorage.getItem("user");
+    const user = JSON.parse(user_string);
+    const [userData, setUserdata] = useState({
+        name: user.name,
+        email: user.email,
+        phoneNumber: user.phoneNumber,
+        address:user.address
+
+    })
+
+    const changeUserData = (e) => {
+        const name = e.target.name;
+        const value=e.target.value;
+        setUserdata({...userData,[name]:value})
+    }
+
+    const updateUser=async()=>{
+        try {
+            const response=await axios.put("http://localhost:8001/api/user/updateUser",userData, { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } });
+            console.log("response of update api",response)  
+           toast.success("Updated Profile")
+        } catch (error) {
+           console.log("error at updating user",error)
+           toast.error("Error occured in updating profile !!") 
+        }
+    }
+
+    console.log("user", user)
+    // const [imgstate, setImagestate] = useState(user.image)
     const token = localStorage.getItem("token");
 
     const uploadImage = async e => {
+        setLoader(true)
         const files = e.target.files;
         const data = new FormData()
         data.append('file', files[0]);
@@ -30,100 +55,97 @@ const Profile = () => {
             body: data
         })
         const file = await res.json();
-        console.log(file);
-        setImagestate(file.secure_url)
-
+        console.log("file", file);
+        const user_update_response = await axios.put("http://localhost:8001/api/user/updateUser", { image: file.secure_url }, { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } });
+        console.log('updated_user_json : ', user_update_response);
+        localStorage.setItem('user', JSON.stringify(user_update_response.data));
         setLoading(false)
+        setLoader(false)
+        toast.success("Image uploaded successfully !!")
     }
-    const getAUser = async () => {
-        console.log("hello")
-        console.log("token", token)
-        try {
-            const response = await axios.get(`http://localhost:8001/api/user/getAUser/${token}`, { headers: { "Authorization": `Bearer ${token}` } })
-            console.log("response", response);
-            const userData = response.data;
-            console.log("data ==", userData)
-            setData(userData);
-            console.log("mm", data)
-        } catch (error) {
-            console.log("error", error)
-        }
-    }
-    const changeUserData=()=>{
-      
-    }
-    
-    useEffect(() => {
-        getAUser()
-    }, [])
+
+
     return (
-
         <div className="container">
-            <div className="box1">
-                <div className="top">
-                    <img src={imgstate} alt="bookstore"></img>
-                    <button >Name </button>
+            <div className="section1">
+                <div className="top-left-profile">
+
+                    <img src={user.image} alt="user's image "></img>
+
+                    <div className="details-user">
+                        <input
+                            name="name"
+                            value={userData.name}
+                            property="readOnly" />
+                        <input
+                            name="email"
+                            value={userData.email}
+                            property="readOnly" />
+                    </div>
                 </div>
-                <div className="list">
-                    <Link to="">My Orders</Link>
-                    <Link to="">My WishList</Link>
-                    <button >Logout</button>
+                <div className="list-left">
+                    <button  ><Link to="/MyOrders">My orders </Link><i class="fas fa-hand-point-right"></i></button>
+                    <button >My wishlist <i class="fas fa-hand-point-right"></i></button>
+                    <button style={{ borderBottom: "2px solid black" }}> Logout  <i class="fas fa-sign-in-alt"></i></button>
                 </div>
             </div>
-            <div className="box2">
-                <h2>
-                    Customer Profile
-                </h2>
-                <div className="box3" >
-
-                    <div className="div1">
-                        <input
-                            type="text"
-                            placeholder="Name"
-                            value={data?.name}
-                        />
-                        <input
-                            type="email"
-                            placeholder="Email"
-                            value={data?.email}
-                        />
-                        <input
-                            type="number"
-                            placeholder="Contact Number"
-                            value={data?.number}
-                        />
-                    </div>
-
-
-                    <div className="div2">
-                        <h3>Profile Upload</h3>
-                        {
-                            loading ?
-                                (<h3>loading</h3>) :
-                                <img src={imgstate} alt="bookstore"></img>
-                        }
-                        <div>
-                            <input
-                                type="file"
-                                name="image-upload"
-                                accept="image/*"
-                                id="input"
-                                onChange={uploadImage}
-                                placeholder="Upload"
-                            ></input>
-
-                            <div className="label">
-                                <label className="image-upload" htmlFor="input">
-                                    Choose your Photo
+            <div className="section2">
+                <div className="center-profile">
+                    <img src={user.image} alt="users image"></img>
+                    <input
+                        type="file"
+                        name="image-upload"
+                        accept="image/*"
+                        id="input"
+                        onChange={uploadImage}
+                        placeholder="Upload"
+                    />
+                    <div className="label">
+                        <label className="image-upload" htmlFor="input">
+                            Choose your Photo
 					            </label>
-                            </div>
+                    </div>
+                    {loader ? (
+                        <div className="loaderHead1">
+                            <div className="loader1"></div>
                         </div>
+                    ) : null
+                    }
+                </div>
+                <div className="detailsss">
+                    <div className="detailss1">
+                        <input
+                        name="name" 
+                        value={userData.name} 
+                        onChange={changeUserData}
+                        />
+                        <input
+                        type="number"
+                        name="phoneNumber"
+                         value={userData.phoneNumber} 
+                         onChange={changeUserData}
+                         />
+                    </div>
+                    <div className="detailss2">
+                        <input 
+                        type="email"
+                        name="email"
+                        value={userData.email}
+                        onChange={changeUserData} 
+                        />
+                        <input 
+                        name="address"
+                        value={userData.address}
+                        onChange={changeUserData}
+                        />
                     </div>
                 </div>
-                <button className="Edit">Edit Profile</button>
-                <button className="Edit">update Profile</button>
+                <button className="update-button" onClick={()=>{updateUser()}}>update</button>
             </div>
+
         </div>
     )
+
+
 }
 export default Profile;

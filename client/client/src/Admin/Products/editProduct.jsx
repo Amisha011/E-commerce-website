@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import axios from 'axios'
 
 import "../Products/products.css";
+import { toast } from "react-toastify";
 
 const EditProduct = ({location}) => {
     const product = location.state ;
@@ -27,9 +28,10 @@ const EditProduct = ({location}) => {
         console.log(productId);
         try {
             const response = await axios.put(`http://localhost:8001/api/product/updateProduct/${product._id}`, productFormData);
-            //toast.success("Successfully Updated product !!");
+            toast.success("Successfully Updated product !!");
         } catch (error) {
             console.log("error", error.response);
+            toast.error("error occured in editing product details")
         }
     }
 

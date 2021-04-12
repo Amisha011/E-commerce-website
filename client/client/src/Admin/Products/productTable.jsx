@@ -2,6 +2,8 @@ import axios from "axios";
 import {Link, useHistory} from "react-router-dom"
 import React, { useEffect, useState } from "react";
 import "../Products/products.css";
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
 
 const ProductTable = () => {
    
@@ -13,6 +15,15 @@ const ProductTable = () => {
         console.log("response", response);
         const products = response.data
         setState(products);
+    }
+    const deleteProduct = async (_id) => {
+        try {
+            const response = await axios.delete(`http://localhost:8001/api/product/deleteProduct/${_id}`)
+            console.log("response: ", response)
+            toast.success("deleted product succesfully !!")
+        } catch (error) {
+            console.log("error", error.response);
+        }
     }
 
     useEffect(() => {
@@ -49,15 +60,13 @@ const ProductTable = () => {
                                 <td>{data.cutPrice}</td>
                                 <td>{data.bookType}</td>
                                 <td>{data.createdAt}</td>
-                                {/* <td><Link to="/Admin/home/productsList/editProduct"><i class="far fa-edit" ></i></Link></td> */}
                                 <td><i  onClick={() => {
                                     history.push({
                                         pathname:"/Admin/home/productsList/editProduct",
                                         state:data 
                                     }) ;
-                                    // history.push("/Admin/home/productsList/editProduct") ;
                                 }} class="far fa-edit" ></i></td>
-                                <td ><i class="fas fa-trash-alt"></i></td>
+                                <td ><i onClick={()=>{deleteProduct(data._id)}} class="fas fa-trash-alt"></i></td>
                             </tr>
                         )
                     })}

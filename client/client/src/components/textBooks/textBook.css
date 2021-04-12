@@ -26,7 +26,7 @@
 }
 .buynow2{
 margin-right: 5px;
-height: 4vh;
+height: 27px;
 outline: none;
 background-color: rgb(180, 18, 18);
 color: white;
@@ -36,7 +36,7 @@ font-weight: 600;
 }
 .wishlist2 {
     margin-right: 5px;
-    height: 4vh;
+    height: 27px;
     outline: none;
     background-color: #42b72a;
     color: white;
@@ -60,4 +60,7 @@ font-weight: 600;
 }
 .details2 p{
 font-style: italic; 
+}
+.tbImage{
+    width: 10%;
 }

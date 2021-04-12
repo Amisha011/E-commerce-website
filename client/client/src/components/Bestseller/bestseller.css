@@ -1,7 +1,6 @@
 .bestsellers{
     padding-bottom: 30px;
-    background-image: linear-gradient(to left, rgb(214, 86, 165) , rgb(228, 207, 228));
-    
+    background-image: linear-gradient(to left, rgb(224, 188, 211) , rgb(228, 207, 228));
 }
 .bestsellers h1{
     padding-left: 10px;
@@ -26,7 +25,7 @@
 }
 .buynow{
 margin-right: 5px;
-height: 4vh;
+height: 27px;
 outline: none;
 background-color: rgb(180, 18, 18);
 color: white;
@@ -36,7 +35,7 @@ font-weight: 600;
 }
 .wishlist{
     margin-right: 5px;
-    height: 4vh;
+    height: 27px;
     outline: none;
     background-color: #42b72a;
     color: white;
@@ -60,4 +59,8 @@ font-weight: 600;
 }
 .details p{
 font-style: italic; 
+}
+.productImage{
+width: 10%;
+height: 10%;
 }

@@ -4,7 +4,6 @@ const bcrypt = require(`bcryptjs`);
 const Product = require(`../models/product.schema`);
 const { request, response } = require("express");
 
-<<<<<<< HEAD
 //add a new product
 
 const addProduct = async (request, response) => {
@@ -18,19 +17,6 @@ const addProduct = async (request, response) => {
     // }
     try {
         const isExist = await Product.findOne({ bookName });
-=======
-//add a new product 
-const addProduct = async(request, response,next)=>{
-    const { bookName, author, price ,cutPrice,bookType} = request.body;
-    console.log("body: ", request.body);
-    const userType=request.user.userType;
-    if(userType=="user"){
-        return response.status(404).json({error:"Admin can only add the product"});
-    }
-    try {
-        const isExist = await Product.findOne({ bookName });
-        console.log(isExist);
->>>>>>> df351c45ad8016cc144f5e27ef8a85e2d863ad16
         if (isExist) {
             return response.status(400).json("book already exist");
         }
@@ -40,7 +26,6 @@ const addProduct = async(request, response,next)=>{
             author,
             cutPrice,
             bookType,
-<<<<<<< HEAD
             image,
         });
         await product.save()
@@ -49,18 +34,6 @@ const addProduct = async(request, response,next)=>{
     }
     catch (error) {
         console.log("error  ", error);
-=======
-        });
-        product.save(((error, product) => {
-            if(error) return response.status(400).json({ error });
-            if(product){
-                response.status(201).json({ product });
-            }
-        }));
-    }
-    catch (error) {
-        console.log("error  ",error);
->>>>>>> df351c45ad8016cc144f5e27ef8a85e2d863ad16
         return response.status(500).json("Something went wrong !!")
     }
 }
@@ -81,11 +54,7 @@ exports.getAllProducts = getAllProducts;
 
 //update a product
 
-<<<<<<< HEAD
 const updateProduct = async (request, response) => {
-=======
-const updateProduct = async (request, response,next) => {
->>>>>>> df351c45ad8016cc144f5e27ef8a85e2d863ad16
     const _id = request.params.id;
     const data = request.body;
     try {
@@ -107,11 +76,7 @@ exports.updateProduct = updateProduct;
 
 //delete a product
 
-<<<<<<< HEAD
 const deleteProduct = async (request, response) => {
-=======
-const deleteProduct = async (request, response,next) => {
->>>>>>> df351c45ad8016cc144f5e27ef8a85e2d863ad16
     const _id = request.params.id;
     try {
         const product = await Product.findByIdAndDelete({ _id });
@@ -124,8 +89,4 @@ const deleteProduct = async (request, response,next) => {
         console.log("error", error);
     }
 }
-<<<<<<< HEAD
 exports.deleteProduct = deleteProduct;
-=======
-exports.deleteProduct=deleteProduct;
->>>>>>> df351c45ad8016cc144f5e27ef8a85e2d863ad16

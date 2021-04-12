@@ -1,18 +1,11 @@
 const jwt = require(`jsonwebtoken`);
 const bcrypt = require("bcryptjs");
+const {SendingMail} =require ("../shared/nodeMailer")
 const User = require("../models/user.schema");
-<<<<<<< HEAD
-const { sendingMail } = require("../shared/nodeMailer");
 const { request, response } = require('express');
 
 //signup
-
 const signUp = async (request, response) => {
-=======
-const {sendingMail} = require("../shared/nodeMailer");
-const { request, response } = require('express');
-const signUp = async (request, response, next) => {
->>>>>>> df351c45ad8016cc144f5e27ef8a85e2d863ad16
     const { name, email, phoneNumber, password } = request.body;
     console.log("body : ", request.body);
     try {
@@ -31,11 +24,7 @@ const signUp = async (request, response, next) => {
         console.log("token", token)
         user.password = undefined;
         response.status(201).json({ user, token });
-<<<<<<< HEAD
-        sendingMail("Successfully signedUp !!", "Book store signUp", user.email);
-=======
-        sendingMail("signup successfull", "Book store signUp", user.email);
->>>>>>> df351c45ad8016cc144f5e27ef8a85e2d863ad16
+    SendingMail("Successfully signedUp !!", "Book store signUp", user.email);
 
     }
     catch (error) {
@@ -44,11 +33,13 @@ const signUp = async (request, response, next) => {
     }
 
 }
-<<<<<<< HEAD
 //update a user
-const updateUser = async (request, response) => {
-    const _id = request.params.id;
+const updateUser = async (request, response,next) => {
+    const _id = request.user._id;
+    console.log('request.body : ', request.body) ;
     const userDetails = request.body
+    console.log("userDetails : ", userDetails) ;
+    console.log('user_id : ', _id) ;
 
     try {
         const user = await User.findByIdAndUpdate(
@@ -81,7 +72,7 @@ const getAUser = async (request, response, next) => {
             }
         )
     }
-    response.json(user).status(200);
+    response.json({data : user}).status(200);
 }
 
 //get all users 
@@ -98,11 +89,6 @@ const getAllUsers = async (request, response) => {
 
 //login api
 
-=======
-
-
-//login api
->>>>>>> df351c45ad8016cc144f5e27ef8a85e2d863ad16
 const login = async (request, response) => {
     const { email, password } = request.body;
     console.log("body", request.body);
@@ -148,11 +134,7 @@ const findByCredentials = async (email, password, response) => {
 
 
 exports.signUp = signUp;
-<<<<<<< HEAD
 exports.login = login;
 exports.getAllUsers = getAllUsers;
 exports.getAUser = getAUser;
-exports.updateUser=updateUser;
-=======
-exports.login = login;
->>>>>>> df351c45ad8016cc144f5e27ef8a85e2d863ad16
+exports.updateUser = updateUser;
